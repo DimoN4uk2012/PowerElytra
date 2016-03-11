@@ -1,0 +1,16 @@
+name: PowerElytra
+version: 0.9
+description: Power Elytra Minecraft 1.9
+authors: [DimoN, angal, JekaRUS]
+website: http://playcraft.com.ua
+
+main: elytra.Elytra
+
+commands:
+    elytra:
+        aliases: [елитра]
+        
+permissions:
+    powerelytra.player.use:
+        description: Can use PowerElitra
+        default: true
