@@ -2,15 +2,21 @@ name: PowerElytra
 version: 0.9
 description: Power Elytra Minecraft 1.9
 authors: [DimoN, angal, JekaRUS]
-website: http://playcraft.com.ua
+website: http://playcraft.com.ua/
 
 main: elytra.Elytra
 
 commands:
     elytra:
-        aliases: [елитра]
+        aliases: [powerelytra,pe,уднекф]
         
 permissions:
     powerelytra.player.use:
         description: Can use PowerElitra
         default: true
+    powerelytra.player.fuel:
+        description: Can use Fuel
+        default: true
+    powerelytra.admin.reload:
+        description: Can use command reload
+        default: op

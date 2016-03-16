@@ -1,0 +1,44 @@
+# Config File PowerElytra
+# Delay to use SHIFT to power elytra (sec). Set 0 to disable.
+version: 1
+
+# Delay to use SHIFT to power elytra (sec). Set 0 to disable.
+delay: 4
+
+# Vector of velocity, add motion. Recommended 1.0 - 2.0.
+velocity: 1.5
+
+# You get Particle type in https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html
+# You get Sound type in https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+
+# If you use SHIFT elytra gets power.
+power:
+    particle:
+        enable: true
+        type: 'FLAME'
+        count: 16
+        dx: 0.1
+        dy: 0.1
+        dz: 0.1
+        speed: 0.15
+    sound:
+        enable: true
+        type: 'ITEM_FIRECHARGE_USE'
+        volume: 1.0
+        pich: 1.0
+    soundReload:
+        enable: true
+        type: 'BLOCK_FIRE_EXTINGUISH'
+        volume: 1.0
+        pich: 1.0
+
+# Fly in Elytra
+fly:
+    particle:
+        enable: true
+        type: 'CLOUD'
+        count: 3
+        dx: 0.1
+        dy: 0.1
+        dz: 0.1
+        speed: 0.1
