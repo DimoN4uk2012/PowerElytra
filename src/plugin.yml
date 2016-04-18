@@ -1,5 +1,5 @@
 name: PowerElytra
-version: 0.9
+version: 1.0
 description: Power Elytra Minecraft 1.9
 authors: [DimoN, angal, JekaRUS]
 website: http://playcraft.com.ua/
@@ -17,6 +17,12 @@ permissions:
     powerelytra.player.fuel:
         description: Can use Fuel
         default: true
+    powerelytra.admin.nofuel:
+        description: Not need fuel
+        default: op
+    powerelytra.admin.givefuel:
+        description: Not need fuel
+        default: op
     powerelytra.admin.reload:
         description: Can use command reload
         default: op

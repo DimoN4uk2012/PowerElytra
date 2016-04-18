@@ -1,8 +1,7 @@
-# Config File PowerElytra
-# Delay to use SHIFT to power elytra (sec). Set 0 to disable.
-version: 1
+# Version Config File PowerElytra. (DON"T CHANGE)
+version: 2
 
-# Delay to use SHIFT to power elytra (sec). Set 0 to disable.
+# Delay to use SHIFT to power elytra (sec). Set 0 to disable. Recommended 3-5.
 delay: 4
 
 # Vector of velocity, add motion. Recommended 1.0 - 2.0.
@@ -12,6 +11,7 @@ velocity: 1.5
 # You get Sound type in https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
 
 # If you use SHIFT elytra gets power.
+# soundReload - time when you can again use power.
 power:
     particle:
         enable: true
@@ -42,3 +42,21 @@ fly:
         dy: 0.1
         dz: 0.1
         speed: 0.1
+
+# Fuel to use power
+# count - need count item to use power. If you use power fuel removed a count.
+# If you don't have fuel item you see message. enable: false - to disable message.
+fuel:
+    enable: true
+    item:
+        id: 385
+        data: 0
+        loreDetect:
+            enable: true
+            lore:
+            - 'fuel'
+            - 'to Elytra'
+        count: 1
+    messages:
+        enable: true
+        message: '§7You need fuel - §eFire Charge§7, to use power!'
