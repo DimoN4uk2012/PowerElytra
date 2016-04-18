@@ -52,7 +52,7 @@ fuel:
         id: 385
         data: 0
         loreDetect:
-            enable: true
+            enable: false
             lore:
             - 'fuel'
             - 'to Elytra'
