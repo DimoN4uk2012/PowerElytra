@@ -240,9 +240,9 @@ public class Elytra extends JavaPlugin implements Listener{
                                                     if (item.getAmount() <= delete){
                                                         delete -= item.getAmount();
                                                         player.getInventory().setItem(i, null);
-                                                        break;
                                                     }else{
                                                             item.setAmount(item.getAmount() - delete);
+                                                            break;
                                                         }
                                                 }else{break;}
                                             }
