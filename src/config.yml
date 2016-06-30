@@ -60,3 +60,7 @@ fuel:
     messages:
         enable: true
         message: '§7You need fuel - §eFire Charge§7, to use power!'
+
+# Deny use power in Worlds (world, world_nether, world_the_end)
+denyWorlds:
+    - 'pvp'

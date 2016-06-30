@@ -25,7 +25,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 public class Elytra extends JavaPlugin implements Listener{
-    int version = 2;
+    int version = 4;
+    
+    List<String> denyWorlds = new LinkedList<>();
     
     Map<String, Long> delay = new HashMap<>();
     Map<String, Long> delayMessage = new HashMap<>();
@@ -188,6 +190,8 @@ public class Elytra extends JavaPlugin implements Listener{
             this.fuelLore = c.getStringList("fuel.item.loreDetect.lore");
             this.messageFuel = c.getString("fuel.messages.message");
             
+            this.denyWorlds = c.getStringList("denyWorlds");
+            
             Bukkit.getLogger().info("[PowerElitra] Config Reloaded.");
         }
     }
@@ -210,68 +214,70 @@ public class Elytra extends JavaPlugin implements Listener{
         Player player = move.getPlayer();
         ItemStack chestItem = player.getInventory().getChestplate();
         if (chestItem != null && chestItem.getType().equals(Material.ELYTRA) && !player.isOnGround() && !player.isFlying()) {
-            if (player.hasPermission("powerelytra.player.use")){
-                if (this.delay.get(player.getName()) == null || this.delay.get(player.getName()) <= System.currentTimeMillis()) {
-                    if (player.isSneaking()){
-                        if (this.enablePowerFuel){
-                            if (player.hasPermission("powerelytra.admin.nofuel")){
-                                power(player);
-                            }else{
-                                    ItemStack fuel = new ItemStack(this.fuelId, this.fuelCount, (short) this.fuelData);
-                                    if (this.enableLoreDetect){
-                                        ItemMeta meta = fuel.getItemMeta();
-                                        meta.setLore(this.fuelLore);
-                                        fuel.setItemMeta(meta);
-                                    }
-                                    ItemStack[] items = player.getInventory().getContents();
-                                    int totalCount = 0;
-                                    int delete = this.fuelCount;
-                                    for (int i = 0; i < player.getInventory().getSize(); i++) {
-                                        ItemStack item = player.getInventory().getItem(i);
-                                        if(fuel.isSimilar(item)){
-                                            totalCount += item.getAmount();
+            if (!this.denyWorlds.contains(player.getWorld().getName())){
+                if (player.hasPermission("powerelytra.player.use")){
+                    if (this.delay.get(player.getName()) == null || this.delay.get(player.getName()) <= System.currentTimeMillis()) {
+                        if (player.isSneaking()){
+                            if (this.enablePowerFuel){
+                                if (player.hasPermission("powerelytra.admin.nofuel")){
+                                    power(player);
+                                }else{
+                                        ItemStack fuel = new ItemStack(this.fuelId, this.fuelCount, (short) this.fuelData);
+                                        if (this.enableLoreDetect){
+                                            ItemMeta meta = fuel.getItemMeta();
+                                            meta.setLore(this.fuelLore);
+                                            fuel.setItemMeta(meta);
                                         }
-                                    }
-                                    if (totalCount >= this.fuelCount){
+                                        ItemStack[] items = player.getInventory().getContents();
+                                        int totalCount = 0;
+                                        int delete = this.fuelCount;
                                         for (int i = 0; i < player.getInventory().getSize(); i++) {
                                             ItemStack item = player.getInventory().getItem(i);
                                             if(fuel.isSimilar(item)){
-                                                if (delete > 0){
-                                                    if (item.getAmount() <= delete){
-                                                        delete -= item.getAmount();
-                                                        player.getInventory().setItem(i, null);
-                                                    }else{
-                                                            item.setAmount(item.getAmount() - delete);
-                                                            break;
-                                                        }
-                                                }else{break;}
+                                                totalCount += item.getAmount();
                                             }
                                         }
-                                        power(player);
-                                    }else{
-                                            if(this.enableMessagesFuel){
-                                                if (this.delayMessage.get(player.getName()) == null || this.delayMessage.get(player.getName()) <= System.currentTimeMillis()){
-                                                    this.delayMessage.put(player.getName(), System.currentTimeMillis() + (this.setDelay * 1000L));
-                                                    player.sendMessage(this.messageFuel);
+                                        if (totalCount >= this.fuelCount){
+                                            for (int i = 0; i < player.getInventory().getSize(); i++) {
+                                                ItemStack item = player.getInventory().getItem(i);
+                                                if(fuel.isSimilar(item)){
+                                                    if (delete > 0){
+                                                        if (item.getAmount() <= delete){
+                                                            delete -= item.getAmount();
+                                                            player.getInventory().setItem(i, null);
+                                                        }else{
+                                                                item.setAmount(item.getAmount() - delete);
+                                                                break;
+                                                            }
+                                                    }else{break;}
                                                 }
                                             }
-                                        }
-                                }
-                        }
-                    }
-                    if (this.delay.get(player.getName()) != null && this.setDelay != 0){
-                        if (this.delay.get(player.getName())/1000 == System.currentTimeMillis()/1000){
-                            if (enablePowerSoundReload){
-                                player.getWorld().playSound(player.getLocation(), this.soundReload, this.soundVolumeElytra, this.soundPichElytra);
+                                            power(player);
+                                        }else{
+                                                if(this.enableMessagesFuel){
+                                                    if (this.delayMessage.get(player.getName()) == null || this.delayMessage.get(player.getName()) <= System.currentTimeMillis()){
+                                                        this.delayMessage.put(player.getName(), System.currentTimeMillis() + (this.setDelay * 1000L));
+                                                        player.sendMessage(this.messageFuel);
+                                                    }
+                                                }
+                                            }
+                                    }
                             }
-                            this.delay.remove(player.getName());
                         }
-                    }
-                }else {
-                        if (enableFlyParticle){
-                            player.getWorld().spawnParticle(this.particleElytra, player.getLocation(), this.particleCountElytra, this.particleFlyDx, this.particleFlyDy, this.particleFlyDz, this.particleFlySpeed);
+                        if (this.delay.get(player.getName()) != null && this.setDelay != 0){
+                            if (this.delay.get(player.getName())/1000 == System.currentTimeMillis()/1000){
+                                if (enablePowerSoundReload){
+                                    player.getWorld().playSound(player.getLocation(), this.soundReload, this.soundVolumeElytra, this.soundPichElytra);
+                                }
+                                this.delay.remove(player.getName());
+                            }
                         }
-                    }
+                    }else {
+                            if (enableFlyParticle){
+                                player.getWorld().spawnParticle(this.particleElytra, player.getLocation(), this.particleCountElytra, this.particleFlyDx, this.particleFlyDy, this.particleFlyDz, this.particleFlySpeed);
+                            }
+                        }
+                }
             }
         }
     }
