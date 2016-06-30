@@ -25,7 +25,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 public class Elytra extends JavaPlugin implements Listener{
-    int version = 4;
+    int version = 3;
     
     List<String> denyWorlds = new LinkedList<>();
     

@@ -1,5 +1,5 @@
 # Version Config File PowerElytra. (DON"T CHANGE)
-version: 2
+version: 3
 
 # Delay to use SHIFT to power elytra (sec). Set 0 to disable. Recommended 3-5.
 delay: 4
