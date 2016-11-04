@@ -1,5 +1,5 @@
 # Version Config File PowerElytra. (DON"T CHANGE)
-version: 3
+version: 4
 
 # Delay to use SHIFT to power elytra (sec). Set 0 to disable. Recommended 3-5.
 delay: 4
@@ -62,5 +62,20 @@ fuel:
         message: '§7You need fuel - §eFire Charge§7, to use power!'
 
 # Deny use power in Worlds (world, world_nether, world_the_end)
-denyWorlds:
+# If you need disable set empty string [    - '']
+denyWorldsUsePower:
     - 'pvp'
+
+# Deny use Elytra Fly (Vanilla Fly in Elytra) in Regions ('pvpregion' - name Region). Need install - WorldGuard Plugin!
+denyRegionsUsePower:
+    - 'pvpregion'
+    - 'parkour'
+
+# Deny use Elytra Fly (Vanilla Fly in Elytra) in Worlds (world, world_nether, world_the_end)
+denyWorldsElytra:
+    - 'pvp'
+
+# Deny use Elytra Fly (Vanilla Fly in Elytra) in Regions ('pvpregion' - name Region). Need install - WorldGuard Plugin!
+denyRegionsElytra:
+    - 'pvpregion'
+    - 'parkour'

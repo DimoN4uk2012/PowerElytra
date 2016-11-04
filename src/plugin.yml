@@ -1,6 +1,6 @@
 name: PowerElytra
-version: 1.1
-description: Power Elytra Minecraft 1.9
+version: 1.2
+description: Power Elytra Minecraft 1.9 - 1.10
 authors: [DimoN, angal, JekaRUS]
 website: http://playcraft.com.ua/
 
@@ -11,7 +11,10 @@ commands:
         aliases: [powerelytra,pe,уднекф]
         
 permissions:
-    powerelytra.player.use:
+    powerelytra.player.useelytra:
+        description: Can use (Vanilla) fly in Elytra
+        default: true
+    powerelytra.player.usepower:
         description: Can use PowerElitra
         default: true
     powerelytra.player.fuel:
