@@ -245,7 +245,7 @@ public class Elytra extends JavaPlugin implements Listener{
                 boolean denyRegion = false;
                 if (this.installWorldGuard){
                     for (ProtectedRegion region : WG.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).getRegions()){
-                        if (this.denyRegionsElytra.contains(region.getId())){
+                        if (this.denyRegionsUsePower.contains(region.getId())){
                             denyRegion = true;
                             break;
                         }
