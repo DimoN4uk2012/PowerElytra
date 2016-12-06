@@ -240,7 +240,7 @@ public class Elytra extends JavaPlugin implements Listener{
     public void onMove(PlayerMoveEvent move) {
         Player player = move.getPlayer();
         ItemStack chestItem = player.getInventory().getChestplate();
-        if (chestItem != null && chestItem.getType().equals(Material.ELYTRA) && !player.isOnGround() && !player.isFlying()) {
+        if (player.isGliding() && !player.isFlying()) {
             if (!this.denyWorldsUsePower.contains(player.getWorld().getName())){
                 boolean denyRegion = false;
                 if (this.installWorldGuard){
